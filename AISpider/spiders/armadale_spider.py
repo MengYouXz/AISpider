@@ -12,6 +12,7 @@ class ArmadalcSpider(scrapy.Spider):
         # 'LOG_FILE': 'scrapy_armadalc.log',
     }
     # 这是一个测试
+    # 这是一个测试
 
     def __init__(self):
         self.headers = {
