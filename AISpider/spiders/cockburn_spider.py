@@ -51,9 +51,8 @@ class CockburnSpider(scrapy.Spider):
                 if self.days.split('/')[1] == start_time.split('/')[1] and self.days.split('/')[2] == start_time.split('/')[2]:
                     start_time = self.days
                 print(start_time + "-----" + end_time)
-                if start_time == '01/05/2024':
-                    for item in self.get_past_data(start_date=start_time,end_date=end_time):
-                        yield item
+                for item in self.get_past_data(start_date=start_time,end_date=end_time):
+                  yield item
     def judge_date(self,start_time):
         if self.days.split('/')[2] == start_time.split('/')[2]:
             if self.days.split('/')[1] == start_time.split('/')[1]:
