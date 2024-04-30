@@ -59,12 +59,12 @@ class SwanSpider(scrapy.Spider):
                     break
                 start_time = y_date
                 end_time = all_month[index + 1]
-                # print('get_first_search_first'+start_time + "-----" + end_time)
-                # for item in self.get_first_search_first(start_time,end_time):
-                #     yield item
-                # print('get_first_search_second'+start_time + "-----" + end_time)
-                # for item in self.get_first_search_second(start_time,end_time):
-                #     yield item
+                print('get_first_search_first'+start_time + "-----" + end_time)
+                for item in self.get_first_search_first(start_time,end_time):
+                    yield item
+                print('get_first_search_second'+start_time + "-----" + end_time)
+                for item in self.get_first_search_second(start_time,end_time):
+                    yield item
                 print('get_first_search_second'+start_time + "-----" + end_time)
                 for item in self.get_first_search_third(start_time,end_time):
                     yield item
@@ -151,11 +151,11 @@ class SwanSpider(scrapy.Spider):
                 yield Request(url,cookies=self.cookie2,headers=self.headers,dont_filter=False,)
 
     def get_first_search_third(self,start_time,end_time):
-        # opt = webdriver.ChromeOptions()
-        # opt.add_argument('--headless')
-        # opt.add_argument('--no-sandbox')
-        # opt.add_argument('--disable-dev-shm-usage')
-        # browser = webdriver.Chrome(opt)
+        opt = webdriver.ChromeOptions()
+        opt.add_argument('--headless')
+        opt.add_argument('--no-sandbox')
+        opt.add_argument('--disable-dev-shm-usage')
+        browser = webdriver.Chrome(opt)
         browser = webdriver.Chrome()
         browser.get(self.start_urls[0])
         cookie1 = browser.get_cookie('ASP.NET_SessionId').get('value')
@@ -175,9 +175,8 @@ class SwanSpider(scrapy.Spider):
             'Referer':referer_url
         }
         url_list = self.deal_url_list(page_source)
-        print(url_list)
-        # for url in url_list:
-        #         yield Request(url,cookies=self.cookie3,headers=self.headers,dont_filter=False,)
+        for url in url_list:
+                yield Request(url,cookies=self.cookie3,headers=self.headers,dont_filter=False,)
         while True:
             url_list = self.nextPage(browser=browser)
             if url_list == None:break
