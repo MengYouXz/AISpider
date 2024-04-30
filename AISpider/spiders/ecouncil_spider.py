@@ -84,7 +84,7 @@ class EcouncilSpider(scrapy.Spider):
             'searchMode': 'A',
             'submitButton': 'Search'
         }
-        if self.run_type == 'fisrt':
+        if self.run_type == 'first' or self.run_type =='all':
             search_response_url = 'https://ecouncil.bayside.vic.gov.au/eservice/daEnquiry.do?'
             data= ''
             for d in paylods1:
@@ -93,7 +93,7 @@ class EcouncilSpider(scrapy.Spider):
             data = data.strip("&")
             search_response_url = search_response_url +data
             yield Request(url=search_response_url,callback=self.parse_search,method='GET',headers=self.headers,dont_filter=False)
-        elif self.run_type == 'second':
+        if self.run_type == 'second'or self.run_type =='all':
             search_response_url = 'https://ecouncil.bayside.vic.gov.au/eservice/daEnquiry.do?'
             data = ''
             for d in paylods2:
@@ -102,6 +102,7 @@ class EcouncilSpider(scrapy.Spider):
             data = data.strip("&")
             search_response_url = search_response_url + data
             yield Request(url=search_response_url, callback=self.parse_search, method='GET', headers=self.headers,dont_filter=False)
+
 
 
     def parse_search(self, response):
